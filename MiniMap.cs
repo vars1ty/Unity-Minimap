@@ -10,6 +10,7 @@ using UnityEngine;
 internal class MiniMap : MonoBehaviour
 {
     #region Variables
+    #region Editor
     [SerializeField, Tooltip("Camera transform")]
     private Transform cameraTransform;
 
@@ -21,6 +22,13 @@ internal class MiniMap : MonoBehaviour
 
     [SerializeField, Tooltip("Icon spacing")]
     private float spacing = 5;
+    #endregion
+    #region Class
+    /// <summary>
+    /// Inverse value used in <see cref="ConvertPosition"/>.
+    /// </summary>
+    private Vector3 inverse;
+    #endregion
     #endregion
 
     /// <summary>
@@ -35,7 +43,7 @@ internal class MiniMap : MonoBehaviour
     /// <returns>The position to be used for the map without any multiplications.</returns>
     private Vector2 ConvertPosition(Vector3 pos)
     {
-        var inverse = cameraTransform.InverseTransformPoint(pos);
+        inverse = cameraTransform.InverseTransformPoint(pos);
         return new Vector2(inverse.x, inverse.z);
     }
 }
